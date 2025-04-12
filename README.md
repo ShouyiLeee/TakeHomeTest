@@ -1,3 +1,4 @@
+
 # 🧠 Liveness Classifier for Face Anti-Spoofing
 
 This project presents an AI-based system to detect face spoofing attacks in eKYC and access control systems. The goal is to classify input face images as either **"normal" (live)** or **"spoof" (fake)** with a liveness score ∈ [0,1].
@@ -8,8 +9,14 @@ This project presents an AI-based system to detect face spoofing attacks in eKYC
 
 The dataset is organized into two main folders: `train` and `test`, each containing:
 
-train/ ├── normal/ └── spoof/ test/ ├── normal/ └── spoof/
-
+```
+train/
+  ├── normal/
+  └── spoof/
+test/
+  ├── normal/
+  └── spoof/
+```
 
 - Images are named using the format `Oi_Ij.jpg`, where `Oi` is the person ID and `Ij` is the j-th image of that person.
 - Most subjects have 4 images; for those with fewer, the first image is repeated.
@@ -32,40 +39,32 @@ train/ ├── normal/ └── spoof/ test/ ├── normal/ └── spoo
 
 ## 🚀 Models Implemented
 
-### ✅ **1. ResNet50 – Single Image**
+### ✅ 1. ResNet50 – Single Image
 - Pretrained ResNet50 backbone
 - Replace FC layer with MLP classifier
 - Only fine-tune the new MLP head
 - **Loss**: CrossEntropyLoss | **Optimizer**: Adam (1e-4) | **Epochs**: 10
 
----
-
-### ✅ **2. ResNet50 + LSTM – Multi Image**
+### ✅ 2. ResNet50 + LSTM – Multi Image
 - Use ResNet50 to extract features for 4 images
 - LSTM processes feature sequence → classify
 - Entire model is trained end-to-end
 - **Loss**: CrossEntropyLoss | **Optimizer**: Adam (1e-4) | **Epochs**: 5
 
----
-
-### ✅ **3. ViT + Mean Pooling – Multi Image**
+### ✅ 3. ViT + Mean Pooling – Multi Image
 - Use `vit_base_patch16_224` from `timm`
 - Remove original classification head
 - Extract embeddings for 4 images → mean pooling → classify
 - Lightweight alternative to LSTM
 - **Loss**: CrossEntropyLoss | **Optimizer**: Adam (2e-5) | **Epochs**: 2
 
----
-
-### ✅ **4. AutoEncoder + ResNet18 – Multi Image**
+### ✅ 4. AutoEncoder + ResNet18 – Multi Image
 - Use AutoEncoder to reconstruct images
 - Pass reconstructed images to a ResNet18 classifier
 - Trained end-to-end
 - **Loss**: CrossEntropyLoss | **Optimizer**: Adam (5e-4) | **Epochs**: 10
 
----
-
-### ✅ **5. AutoEncoder + Reconstruction Error – One-Class Learning**
+### ✅ 5. AutoEncoder + Reconstruction Error – One-Class Learning
 - Train AE on **normal** class only
 - During inference, calculate reconstruction error
 - Use ROC-AUC to find threshold to classify spoof
@@ -137,7 +136,5 @@ Designed a **robust fraud detection pipeline** with 8 layers:
 
 ## 👨‍💻 Author
 
-- Name: [Your Full Name]  
-- Email: [Your Email Address]  
-- Position: Applicant for [Python Developer / AI Intern / etc.]
-
+- Name: Truong Trong-Dai Le
+- Email: 22521576@gm.uit.edu.vn
