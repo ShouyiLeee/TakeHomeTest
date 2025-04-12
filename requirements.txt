@@ -1,0 +1,14 @@
+# Core dependencies with CUDA support
+--index-url https://download.pytorch.org/whl/cu118
+torch==2.6.0+cu118
+torchvision
+torchaudio
+timm
+numpy
+matplotlib
+scikit-learn
+Pillow
+
+# Jupyter related
+jupyter
+ipywidgets
